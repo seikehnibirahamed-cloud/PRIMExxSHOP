@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>PRIMExSHOP</title>
+<style>
+<style>
+:root{
+  --bg:#ffffff;--surface:#ffffff;--surface2:#f6f8f4;--surface3:#eef3ec;
+  --text:#172019;--muted:#6b746d;--line:#dfe6df;--orange:#f4c400;--orange2:#ffd83d;
+  --green:#159447;--green2:#0f7d3a;--red:#e5484d;--shadow:0 10px 28px rgba(25,55,30,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh;padding-bottom:92px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.hide{display:none!important}
+.container{width:min(1180px,100%);margin:auto;padding:0 16px}
+.topbar{height:34px;background:#f5f8f4;border-bottom:1px solid var(--line);color:#59635b;font-size:11px;display:flex;align-items:center;justify-content:center}
+.header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px}.logo{font-size:22px;font-weight:1000;letter-spacing:-1px;color:#172019}.logo b{color:var(--green)}
+.desktopLinks{display:flex;gap:5px;align-items:center}.navbtn{border:0;background:transparent;color:#5d665f;padding:9px 11px;border-radius:11px;font-weight:800}.navbtn:hover,.navbtn.active{background:#edf8ef;color:var(--green)}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:99px;background:var(--orange);color:#172019;font-size:10px;margin-left:3px}.iconBtn{width:42px;height:42px;border:1px solid var(--line);background:#f6f8f4;color:#172019;border-radius:50%;font-size:18px}
+.page{display:none}.page.active{display:block}.hero{padding:14px 0}.heroBox{min-height:360px;border-radius:28px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 18%,rgba(21,148,71,.16),transparent 30%),radial-gradient(circle at 10% 90%,rgba(244,196,0,.18),transparent 30%),linear-gradient(145deg,#f5faf5,#ffffff 70%);border:1px solid #dfe9df;padding:38px 25px;display:flex;align-items:flex-end}.heroGlow{position:absolute;width:270px;height:270px;border-radius:50%;right:-80px;top:-100px;background:rgba(21,148,71,.10);filter:blur(2px)}.heroText{position:relative;z-index:2;max-width:650px}.eyebrow{display:inline-block;color:var(--green);font-weight:900;font-size:12px;letter-spacing:1px}.hero h1{font-size:clamp(40px,10vw,76px);line-height:.95;margin:12px 0;letter-spacing:-3px;color:#162019}.hero p{color:#687269;line-height:1.7;max-width:590px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:900;transition:.15s}.btn:active{transform:scale(.96)}.primary{background:var(--green);color:#fff}.secondary{background:#fff;color:#1d251f;border:1px solid #cfd9d0}.green{background:#159447;color:#fff}.red{background:var(--red);color:#fff}.small{padding:9px 11px;font-size:12px;border-radius:11px}
+.section{padding:18px 0 30px}.head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:15px}.head h2{margin:0;font-size:25px}.muted{color:var(--muted)}.tools{display:flex;gap:8px;flex-wrap:wrap}.input,.select,.textarea{width:100%;border:1px solid #d6dfd7;background:#fff;color:#172019;border-radius:13px;padding:12px 13px;outline:none}.input::placeholder,.textarea::placeholder{color:#909a92}.input:focus,.select:focus,.textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(21,148,71,.10)}.search{width:260px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card{background:#fff;border:1px solid #dfe7df;border-radius:22px;overflow:hidden;box-shadow:0 5px 18px rgba(28,70,35,.09);transition:.18s}.card:hover{transform:translateY(-3px);border-color:#a8cdb0}.pic{height:225px;background:#f1f6f1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}.pic img{width:100%;height:100%;object-fit:cover}.tag{position:absolute;left:11px;top:11px;background:var(--green);color:#fff;border:0;border-radius:9px;padding:7px 9px;font-size:10px;font-weight:900;z-index:2}.body{padding:13px}.body h3{margin:2px 0 7px;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.price{font-size:21px;font-weight:1000;color:#159447}.stock{font-size:11px;color:#6f786f}.productActions{display:flex;gap:7px;margin-top:11px}.productActions .btn{flex:1}
+.panel{background:#fff;border:1px solid #dfe7df;border-radius:19px;padding:17px;margin-bottom:13px;box-shadow:0 6px 20px rgba(28,70,35,.07)}.notice{background:#fff9d9;border:1px solid #f0d45b;border-radius:13px;padding:12px;color:#5d5110}.form{display:grid;gap:10px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#f7faf6;border:1px solid #dfe7df;border-radius:15px;padding:14px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:23px;margin-top:4px}.status{display:inline-flex;padding:5px 9px;border-radius:99px;font-size:10px;font-weight:900}.pending{background:#fff4c7;color:#846d00}.approved{background:#dff6e5;color:#13723a}.rejected{background:#ffe3e5;color:#b22c34}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:900px}.table th,.table td{padding:11px;border-bottom:1px solid #e2e8e2;text-align:left;vertical-align:top;font-size:12px}.empty{text-align:center;padding:38px;color:var(--muted)}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:13px}.tab{border:0;padding:10px 12px;border-radius:10px;background:#eef3ee;color:#5d665f;font-weight:900;white-space:nowrap}.tab.active{background:#e4f5e8;color:var(--green)}
+.profileTop{display:flex;align-items:center;gap:20px;padding:20px 0 16px}.avatarWrap{text-align:center}.avatar{width:142px;height:142px;border-radius:50%;border:5px solid var(--green);object-fit:cover;background:#eef3ee;box-shadow:0 0 0 4px #fff}.changePhoto{margin-top:10px}.profileName{font-size:31px;font-weight:1000;margin:0}.username{color:var(--green);font-size:17px;margin-top:5px}.infoList{background:#fff;border:1px solid #dfe7df;border-radius:22px;padding:7px 18px}.infoRow{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid #e2e8e2}.infoRow:last-child{border-bottom:0}.infoLabel{color:#69736b}.infoValue{text-align:right;max-width:58%;word-break:break-word}.infoIcon{color:var(--green);margin-right:10px}
+.cartRow{display:flex;justify-content:space-between;gap:15px;align-items:center}.cartItem{display:flex;gap:12px;align-items:center}.cartImg{width:70px;height:70px;border-radius:12px;object-fit:cover;background:#eef3ee}.qty{display:flex;align-items:center;gap:7px}.qty button{width:30px;height:30px;border:1px solid #d5ded6;background:#f6f9f6;color:#172019;border-radius:8px}
+.modal{position:fixed;inset:0;background:rgba(15,25,17,.45);display:none;align-items:center;justify-content:center;z-index:100;padding:14px}.modal.open{display:flex}.modalbox{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border:1px solid #dfe7df;border-radius:23px;padding:19px}.close{float:right;border:0;background:#eef3ee;color:#172019;border-radius:50%;width:36px;height:36px;font-size:22px}.toast{position:fixed;right:15px;bottom:98px;z-index:200;background:#172019;color:#fff;padding:12px 15px;border-radius:12px;display:none;font-weight:800;box-shadow:var(--shadow)}
+.bottomNav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:60;width:min(650px,calc(100% - 24px));height:78px;background:rgba(255,255,255,.97);border:1px solid #dbe4dc;border-radius:30px;box-shadow:0 15px 45px rgba(25,55,30,.14);display:grid;grid-template-columns:repeat(4,1fr);align-items:center}.bottomBtn{border:0;background:transparent;color:#778078;height:68px;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.bottomBtn .ico{font-size:24px;line-height:1}.bottomBtn span:last-child{font-size:10px;letter-spacing:.5px}.bottomBtn.active{color:var(--green)}.adminLink{margin-top:10px}
+.walletHero{background:linear-gradient(135deg,#0e7b39,#18a052 55%,#f0c400);color:#fff;border-radius:24px;padding:20px;box-shadow:0 12px 30px rgba(21,148,71,.20);margin-bottom:13px}.walletHero .walletTitle{font-weight:900;letter-spacing:1px}.walletHero .walletBalance{font-size:36px;font-weight:1000;margin-top:8px}.walletActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.walletAction{border:0;border-radius:18px;padding:18px;background:#e9f8ed;color:#126f35;font-weight:1000;font-size:16px}.walletAction.yellow{background:#fff7ce;color:#725d00}.bkashBox{background:#fff8d7;border:1px solid #f0d46a;border-radius:18px;padding:15px}.bkashNumber{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #eadb9b;border-radius:14px;padding:12px 14px;margin-top:10px}.copyBtn{border:0;background:var(--green);color:#fff;border-radius:10px;padding:9px 12px;font-weight:900}.historyRow{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #e5ebe5}.historyRow:last-child{border-bottom:0}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.desktopLinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.profileTop{flex-direction:column;text-align:center}.infoRow{align-items:flex-start}.heroBox{min-height:330px}.formgrid{grid-template-columns:1fr}}@media(max-width:500px){.container{padding:0 13px}.grid{grid-template-columns:repeat(2,1fr);gap:10px}.pic{height:175px}.body{padding:11px}.body h3{font-size:15px}.price{font-size:19px}.productActions{gap:5px}.productActions .btn{padding:9px 7px;font-size:11px}.head{align-items:stretch;flex-direction:column}.search{width:100%}.heroBox{border-radius:23px;padding:28px 20px}.hero h1{font-size:45px}.profileName{font-size:27px}.avatar{width:130px;height:130px}}
+</style></style>
+</head>
+<body>
+
+<div class="topbar">🚚 Fast delivery • Secure order verification • bKash: <b style="color:#fff;margin-left:4px">01642268349</b></div>
+
+<header class="header">
+  <div class="container nav">
+    <div class="logo">PRIME<b>xSHOP</b></div>
+    <div class="desktopLinks">
+      <button class="navbtn active" data-page="home">Home</button>
+      <button class="navbtn" data-page="orders">Orders</button>
+      <button class="navbtn" data-page="wallet">Wallet <span class="badge" id="walletBadge">৳0</span></button>
+      <button class="navbtn" data-page="profile">Account</button>
+      <button class="navbtn" data-page="cart">Cart <span class="badge" id="cartCount">0</span></button>
+    </div>
+    <button class="iconBtn" id="topAuthBtn" title="Account">👤</button>
+  </div>
+</header>
+
+<main class="container">
+
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="heroBox">
+      <div class="heroGlow"></div>
+      <div class="heroText">
+        <span class="eyebrow">PRIMExSHOP • VERIFIED ORDERS</span>
+        <h1>BUY SMART.<br>PAY SIMPLE.</h1>
+        <p>Product বাছাই করুন, cart-এ রাখুন, delivery information দিন এবং bKash Transaction ID submit করুন। Admin payment verify করার পর order process হবে।</p>
+        <div class="actions">
+          <button class="btn primary" id="shopNow">SHOP PRODUCTS</button>
+          <button class="btn secondary" id="walletHero">ADD MONEY</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="shopSection">
+    <div class="head">
+      <div><h2>All Collection</h2><div class="muted">Gaming gear, accessories and more.</div></div>
+      <div class="tools">
+        <input class="input search" id="search" placeholder="🔎 Search products">
+        <select class="select" id="category"><option value="">All categories</option></select>
+      </div>
+    </div>
+    <div class="grid" id="productGrid"></div>
+  </section>
+</section>
+
+<section id="cart" class="page">
+  <div class="section">
+    <div class="head"><div><h2>My Cart</h2><div class="muted">Review your items before checkout.</div></div><button class="btn secondary" data-page="home">Continue Shopping</button></div>
+    <div id="cartBox"></div>
+  </div>
+</section>
+
+<section id="orders" class="page">
+  <div class="section">
+    <div class="head"><div><h2>My Orders</h2><div class="muted">Track payment and delivery status.</div></div><button class="btn secondary" data-page="home">Shop More</button></div>
+    <div id="ordersBox"></div>
+  </div>
+</section>
+
+<section id="wallet" class="page">
+  <div class="section">
+    <div class="head"><div><h2>Wallet</h2><div class="muted">Add money by bKash after sending payment.</div></div></div>
+    <div id="walletBox"></div>
+  </div>
+</section>
+
+<section id="profile" class="page">
+  <div class="section">
+    <div class="head">
+      <div><h2>My Profile</h2><div class="muted">Your account information.</div></div>
+      <div class="actions" style="margin:0">
+        <button class="btn secondary small" data-page="orders">📦 My Orders</button>
+        <button class="btn secondary small" data-page="wallet">💰 Wallet</button>
+      </div>
+    </div>
+    <div id="profileBox"></div>
+  </div>
+</section>
+
+<section id="help" class="page">
+  <div class="section">
+    <div class="panel" style="max-width:680px;margin:30px auto;text-align:center;padding:32px">
+      <div style="font-size:52px">💬</div>
+      <h2>Help Center</h2>
+      <p class="muted">Website, payment, wallet বা order নিয়ে সমস্যা হলে Admin-এর WhatsApp-এ message করুন।</p>
+      <a class="btn green" href="https://wa.me/8801642268349?text=Assalamualaikum%20NIBIR%20SHOP%20Admin%2C%20amar%20website%20problem%20ache." target="_blank" rel="noopener">WhatsApp Help</a>
+    </div>
+  </div>
+</section>
+
+<!-- Separate Admin Dashboard -->
+<section id="admin" class="page">
+  <div class="section">
+    <div class="head">
+      <div><h2>Admin Dashboard</h2><div class="muted">Orders, payments, users, products and media.</div></div>
+      <button class="btn secondary small" data-page="home">← Back to Shop</button>
+    </div>
+    <div id="adminBox"></div>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;color:#666d7d;padding:20px 0 100px;font-size:12px">PRIMExSHOP • bKash 01642268349 • © 2026</footer>
+
+<nav class="bottomNav">
+  <button class="bottomBtn active" data-page="home"><span class="ico">⌂</span><span>HOME</span></button>
+  <button class="bottomBtn" data-page="cart"><span class="ico">🛍</span><span>CART</span></button>
+  <button class="bottomBtn" data-page="help"><span class="ico">💬</span><span>CHAT</span></button>
+  <button class="bottomBtn" data-page="profile"><span class="ico">●</span><span>ACCOUNT</span></button>
+</nav>
+
+<div class="modal" id="modal">
+  <div class="modalbox">
+    <button class="close" id="closeModal">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+import {
+  getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+  signOut,updateProfile
+} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+import {
+  getFirestore,collection,doc,addDoc,setDoc,getDoc,getDocs,updateDoc,deleteDoc,
+  query,where,orderBy,onSnapshot,serverTimestamp,increment
+} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+const firebaseConfig={
+  apiKey:'AIzaSyD4Kp-ZO2pURd8BN9fNV9PKsAgPvRCqvrY',
+  authDomain:'primexshop-324ef.firebaseapp.com',
+  projectId:'primexshop-324ef',
+  storageBucket:'primexshop-324ef.firebasestorage.app',
+  messagingSenderId:'702642431319',
+  appId:'1:702642431319:web:68295f24b19e0846948a12',
+  measurementId:'G-ZWT7SNR33C'
+};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const ADMIN_UID='qBLMYwNk0obXS9UDD1vWFjCAXho2';
+const BKASH='01642268349';
+
+let currentUser=null,userData=null,products=[];
+let cart=JSON.parse(localStorage.getItem('PRIMEX_CART')||'[]');
+let unsubProducts=null,unsubOrders=null,unsubWallet=null,unsubUser=null;
+let isAdmin=false,adminTab='orders';
+
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const money=n=>'৳'+Number(n||0).toLocaleString('en-BD');
+
+function toast(m){
+  $('toast').textContent=m;
+  $('toast').style.display='block';
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer=setTimeout(()=>$('toast').style.display='none',2600);
+}
+function modal(html){$('modalBody').innerHTML=html;$('modal').classList.add('open')}
+function closeModal(){$('modal').classList.remove('open')}
+$('closeModal').onclick=closeModal;
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});
+
+function page(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=$(name);
+  if(!target)return;
+  target.classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='cart')renderCart();
+  if(name==='orders')renderOrders();
+  if(name==='wallet')renderWallet();
+  if(name==='profile')renderProfile();
+  if(name==='admin')renderAdmin();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-page]');
+  if(b){e.preventDefault();page(b.dataset.page)}
+});
+
+$('shopNow').onclick=()=>document.querySelector('#shopSection').scrollIntoView({behavior:'smooth'});
+$('walletHero').onclick=()=>page('wallet');
+$('topAuthBtn').onclick=authModal;
+
+function updateUI(){
+  $('walletBadge').textContent=money(userData?.wallet||0);
+  $('cartCount').textContent=cart.reduce((a,x)=>a+x.qty,0);
+}
+
+function authModal(){
+  if(currentUser){
+    modal(`
+      <h2>Account</h2>
+      <p><b>${esc(userData?.name||currentUser.displayName||'User')}</b></p>
+      <p class="muted">${esc(currentUser.email||'')}</p>
+      <div class="actions">
+        <button class="btn primary" id="goProfile">My Profile</button>
+        <button class="btn red" id="logoutBtn">Logout</button>
+      </div>
+      ${isAdmin?'<button class="btn secondary adminLink" id="goAdmin">⚙ Admin Dashboard</button>':''}
+    `);
+    $('goProfile').onclick=()=>{closeModal();page('profile')};
+    $('logoutBtn').onclick=async()=>{await signOut(auth);closeModal();toast('Logged out')};
+    if($('goAdmin'))$('goAdmin').onclick=()=>{closeModal();page('admin')};
+    return;
+  }
+  modal(`
+    <div class="tabs"><button class="tab active" id="loginTab">LOGIN</button><button class="tab" id="registerTab">REGISTER</button></div>
+    <div id="authArea"></div>
+  `);
+  renderAuth('login');
+}
+function renderAuth(mode){
+  const a=$('authArea');
+  a.innerHTML=mode==='login'?`
+    <form class="form" id="loginForm">
+      <input class="input" id="email" type="email" placeholder="Email Address" required>
+      <input class="input" id="password" type="password" placeholder="Password" required>
+      <button class="btn primary">LOGIN</button>
+    </form>
+    <p class="muted" style="font-size:12px;margin-top:10px">Admin access is controlled by the configured Firebase Admin UID.</p>
+  `:`
+    <form class="form" id="registerForm">
+      <input class="input" id="name" placeholder="Full Name" required>
+      <input class="input" id="username" placeholder="Username (Unique)">
+      <input class="input" id="regEmail" type="email" placeholder="Email Address" required>
+      <input class="input" id="regPhone" placeholder="Phone Number" required>
+      <div class="formgrid"><input class="input" id="birthYear" type="number" placeholder="Birth Year"><input class="input" id="age" type="number" placeholder="Age"></div>
+      <textarea class="textarea" id="regAddress" placeholder="Full Delivery Address"></textarea>
+      <input class="input" id="regPassword" type="password" minlength="6" placeholder="Password (6+ characters)" required>
+      <button class="btn primary">CREATE ACCOUNT</button>
+    </form>
+  `;
+  $('loginTab').onclick=()=>{renderAuth('login');$('loginTab').classList.add('active');$('registerTab').classList.remove('active')};
+  $('registerTab').onclick=()=>{renderAuth('register');$('registerTab').classList.add('active');$('loginTab').classList.remove('active')};
+
+  if(mode==='login'){
+    $('loginForm').onsubmit=async e=>{
+      e.preventDefault();
+      try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value);closeModal();toast('Login successful')}catch(err){toast(err.message)}
+    };
+  }else{
+    $('registerForm').onsubmit=async e=>{
+      e.preventDefault();
+      try{
+        const c=await createUserWithEmailAndPassword(auth,$('regEmail').value.trim(),$('regPassword').value);
+        await updateProfile(c.user,{displayName:$('name').value.trim()});
+        await setDoc(doc(db,'users',c.user.uid),{
+          uid:c.user.uid,name:$('name').value.trim(),username:$('username').value.trim(),
+          email:$('regEmail').value.trim(),phone:$('regPhone').value.trim(),
+          birthYear:Number($('birthYear').value)||'',age:Number($('age').value)||'',
+          address:$('regAddress').value.trim(),wallet:0,photoUrl:'',
+          createdAt:serverTimestamp(),role:'user'
+        });
+        closeModal();toast('Account created successfully');
+      }catch(err){toast(err.message)}
+    };
+  }
+}
+
+async function loadUser(u){
+  currentUser=u;
+  if(unsubOrders){unsubOrders();unsubOrders=null}
+  if(unsubWallet){unsubWallet();unsubWallet=null}
+  if(unsubUser){unsubUser();unsubUser=null}
+  if(!u){userData=null;isAdmin=false;updateUI();return}
+  isAdmin=u.uid===ADMIN_UID;
+  const userRef=doc(db,'users',u.uid);
+  try{
+    const s=await getDoc(userRef);
+    userData=s.exists()?s.data():{uid:u.uid,name:u.displayName||'',email:u.email||'',wallet:0};
+    updateUI();
+    unsubUser=onSnapshot(userRef, snap=>{
+      if(snap.exists()) userData=snap.data();
+      else if(!userData) userData={uid:u.uid,name:u.displayName||'',email:u.email||'',wallet:0};
+      updateUI();
+      if($('wallet')?.classList.contains('active')) renderWallet();
+      if($('profile')?.classList.contains('active')) renderProfile();
+    }, err=>console.warn('User wallet listener:',err.message));
+  }catch(err){
+    userData={uid:u.uid,name:u.displayName||'',email:u.email||'',wallet:0};
+    updateUI();
+  }
+  listenUserData();
+}
+function listenUserData(){
+  if(!currentUser)return;
+  unsubOrders=onSnapshot(query(collection(db,'orders'),where('userId','==',currentUser.uid),orderBy('createdAt','desc')),()=>{if($('orders').classList.contains('active'))renderOrders()});
+  unsubWallet=onSnapshot(query(collection(db,'walletRequests'),where('userId','==',currentUser.uid)),()=>{if($('wallet').classList.contains('active'))renderWallet()},err=>console.warn('Wallet requests listener:',err.message));
+}
+
+function listenProducts(){
+  if(unsubProducts)unsubProducts();
+  unsubProducts=onSnapshot(collection(db,'products'),snap=>{
+    products=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderProducts();fillCategories();
+  },err=>toast('Products load error: '+err.message));
+}
+function fillCategories(){
+  const cs=[...new Set(products.map(p=>p.category).filter(Boolean))];
+  $('category').innerHTML='<option value="">All categories</option>'+cs.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+function placeholderImage(name){
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#171920"/><text x="50%" y="50%" text-anchor="middle" font-size="38" fill="#ff8a00">${esc(name||'PRIMExSHOP')}</text></svg>`;
+  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
+function renderProducts(){
+  const q=($('search').value||'').toLowerCase().trim(),cat=$('category').value;
+  const ps=products.filter(p=>
+    (!q||String(p.name||'').toLowerCase().includes(q)||String(p.description||'').toLowerCase().includes(q)) &&
+    (!cat||p.category===cat)
+  );
+  $('productGrid').innerHTML=ps.length?ps.map(p=>`
+    <article class="card">
+      <div class="pic">
+        <span class="tag">${esc(p.category||'PRODUCT')}</span>
+        <img src="${esc(p.imageUrl||placeholderImage(p.name))}" alt="${esc(p.name)}" onerror="this.src='${placeholderImage(p.name)}'">
+      </div>
+      <div class="body">
+        <h3 title="${esc(p.name)}">${esc(p.name)}</h3>
+        <div class="muted" style="font-size:11px;min-height:16px">${esc(p.description||'')}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <span class="price">${money(p.price)}</span><span class="stock">Stock: ${Number(p.stock||0)}</span>
+        </div>
+        <div class="productActions">
+          <button class="btn secondary small" data-view="${p.id}">VIEW</button>
+          <button class="btn primary small" data-add="${p.id}">＋</button>
+        </div>
+      </div>
+    </article>
+  `).join(''):'<div class="panel empty" style="grid-column:1/-1">No products found.</div>';
+}
+$('search').oninput=renderProducts;
+$('category').onchange=renderProducts;
+
+document.addEventListener('click',e=>{
+  const view=e.target.closest('[data-view]');
+  const add=e.target.closest('[data-add]');
+  if(view)viewProduct(view.dataset.view);
+  if(add){
+    const p=products.find(x=>x.id===add.dataset.add);
+    const topup=isTopup(p);
+    if(topup)viewProduct(add.dataset.add);else addToCart(add.dataset.add,'');
+  }
+});
+
+function isTopup(p){
+  if(!p)return false;
+  const c=String(p.category||'').toLowerCase().replace(/[-_ ]/g,'');
+  return c==='topup'||c==='digitaltopup'||String(p.type||'').toLowerCase()==='topup';
+}
+function isPhysical(p){ return !!p && !isTopup(p); }
+function viewProduct(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  const needsUid=isTopup(p);
+  modal(`
+    <h2>${esc(p.name)}</h2>
+    <img src="${esc(p.imageUrl||placeholderImage(p.name))}" style="width:100%;max-height:300px;object-fit:cover;border-radius:16px;margin:8px 0">
+    <p class="muted">${esc(p.description||'')}</p>
+    <h2 style="color:var(--orange)">${money(p.price)}</h2>
+    ${needsUid?`<div class="notice"><b>TOP-UP ORDER</b><br>এই Top-Up-এর জন্য শুধু আপনার IN GAME UID দিন। কোনো delivery address লাগবে না।</div><input class="input" id="gameUid" placeholder="IN GAME UID" inputmode="numeric" required style="margin-top:10px">`:''}
+    <div class="actions">
+      <button class="btn primary" id="modalAdd">${needsUid?'ADD TOP-UP':'ADD TO CART'}</button>
+      <button class="btn secondary" id="modalBuy">${needsUid?'ORDER NOW':'BUY NOW'}</button>
+    </div>
+  `);
+  $('modalAdd').onclick=()=>{
+    const uid=$('gameUid')?.value.trim()||'';
+    if(needsUid&&!uid)return toast('IN GAME UID দিন');
+    addToCart(id,uid);closeModal();
+  };
+  $('modalBuy').onclick=()=>{
+    const uid=$('gameUid')?.value.trim()||'';
+    if(needsUid&&!uid)return toast('IN GAME UID দিন');
+    addToCart(id,uid);closeModal();page('cart');
+  };
+}
+function addToCart(id,gameUid=''){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  if(Number(p.stock||0)<1)return toast('Out of stock');
+  if(cart.length){
+    const existing=products.find(x=>x.id===cart[0].productId);
+    if(existing && isTopup(existing)!==isTopup(p))return toast('Top-Up ও Product একসাথে order করা যাবে না');
+  }
+  if(isTopup(p)&&!gameUid)return toast('IN GAME UID দিন');
+  const x=cart.find(i=>i.productId===id&&i.gameUid===gameUid);
+  if(x)x.qty++;else cart.push({productId:id,qty:1,gameUid});
+  localStorage.setItem('PRIMEX_CART',JSON.stringify(cart));updateUI();toast('Added to cart');
+}
+function removeCart(i){cart.splice(i,1);localStorage.setItem('PRIMEX_CART',JSON.stringify(cart));updateUI();renderCart()}
+function changeQty(i,d){
+  if(!cart[i])return;
+  cart[i].qty+=d;if(cart[i].qty<1)cart.splice(i,1);
+  localStorage.setItem('PRIMEX_CART',JSON.stringify(cart));updateUI();renderCart()
+}
+function renderCart(){
+  if(!cart.length){$('cartBox').innerHTML='<div class="panel empty">Your cart is empty.<br><button class="btn primary" data-page="home" style="margin-top:12px">SHOP PRODUCTS</button></div>';return}
+  let total=0;
+  const rows=cart.map((i,idx)=>{
+    const p=products.find(x=>x.id===i.productId);if(!p)return '';
+    const sub=Number(p.price||0)*i.qty;total+=sub;
+    return `<div class="panel cartRow">
+      <div class="cartItem"><img class="cartImg" src="${esc(p.imageUrl||placeholderImage(p.name))}">
+        <div><b>${esc(p.name)}</b><br><span class="muted">${money(p.price)} × ${i.qty}</span>${i.gameUid?`<br><span class="muted">UID: ${esc(i.gameUid)}</span>`:''}</div>
+      </div>
+      <div style="text-align:right"><b>${money(sub)}</b><div class="qty" style="margin-top:7px"><button data-qty="${idx}" data-d="-1">−</button><span>${i.qty}</span><button data-qty="${idx}" data-d="1">+</button></div><button class="btn red small" data-remove="${idx}" style="margin-top:7px">Remove</button></div>
+    </div>`;
+  }).join('');
+  $('cartBox').innerHTML=rows+`<div class="panel"><div class="between"><h3>Subtotal</h3><h2 style="color:var(--orange)">${money(total)}</h2></div><button class="btn primary" id="checkoutBtn" style="width:100%">PROCEED TO CHECKOUT</button></div>`;
+  $('checkoutBtn').onclick=checkout;
+}
+document.addEventListener('click',e=>{
+  const q=e.target.closest('[data-qty]'),r=e.target.closest('[data-remove]');
+  if(q)changeQty(Number(q.dataset.qty),Number(q.dataset.d));
+  if(r)removeCart(Number(r.dataset.remove));
+});
+
+async function checkout(){
+  if(!currentUser)return authModal();
+  if(!cart.length)return toast('Cart is empty');
+  let subtotal=0;
+  const topupOrder=isTopup(products.find(x=>x.id===cart[0].productId));
+  cart.forEach(i=>{const p=products.find(x=>x.id===i.productId);if(p)subtotal+=Number(p.price||0)*i.qty});
+  modal(`
+    <h2>${topupOrder?'Top-Up Order':'Checkout'}</h2>
+    <div class="notice">bKash: <b>${BKASH}</b>${topupOrder?'<br>Top-Up order-এর জন্য শুধু IN GAME UID লাগবে।':'<br>ঢাকার ভিতরে delivery fee <b>৳60</b> • ঢাকার বাইরে <b>৳100</b>'}</div>
+    <form class="form" id="checkoutForm" style="margin-top:10px">
+      ${topupOrder?`<input class="input" id="topupUid" value="${esc(cart[0].gameUid||'')}" placeholder="IN GAME UID" required>`:`<div class="formgrid"><input class="input" id="cPhone" value="${esc(userData?.phone||'')}" placeholder="Phone Number" required><select class="select" id="area"><option value="dhaka">ঢাকার ভিতরে — ৳60</option><option value="outside">ঢাকার বাইরে — ৳100</option></select></div>
+      <div class="formgrid"><input class="input" id="district" placeholder="জেলা" required><input class="input" id="upazila" placeholder="সদর / উপজেলা / থানা" required></div>
+      <div class="formgrid"><input class="input" id="village" placeholder="গ্রাম / এলাকা" required><input class="input" id="road" placeholder="রোড / বাড়ি নম্বর" required></div>
+      <textarea class="textarea" id="address" placeholder="বিস্তারিত ঠিকানা" required>${esc(userData?.address||'')}</textarea>`}
+      <select class="select" id="payMethod"><option value="bkash">bKash — Transaction ID</option><option value="wallet">Wallet — Use Wallet Balance</option></select>
+      <div id="payExtra"></div>
+      <div class="notice">bKash হলে Admin Transaction ID verify করবে। Wallet হলে Admin approve করে wallet থেকে টাকা কাটবে।</div>
+      <button class="btn primary">SUBMIT ORDER</button>
+    </form>
+  `);
+  const payFields=()=>{
+    $('payExtra').innerHTML=$('payMethod').value==='bkash'
+      ?`<input class="input" id="txid" placeholder="bKash Transaction ID" required>`
+      :`<div class="notice">Available wallet: <b>${money(userData?.wallet||0)}</b></div>`;
+  };
+  $('payMethod').onchange=payFields;payFields();
+  $('checkoutForm').onsubmit=async e=>{
+    e.preventDefault();
+    const fee=topupOrder?0:($('area').value==='dhaka'?60:100),total=subtotal+fee;
+    if($('payMethod').value==='wallet'&&Number(userData?.wallet||0)<total)return toast('Wallet balance is not enough');
+    if(topupOrder && !$('topupUid').value.trim())return toast('IN GAME UID দিন');
+    const items=cart.map(i=>{const p=products.find(x=>x.id===i.productId);return {productId:p.id,name:p.name,price:p.price,qty:i.qty,gameUid:topupOrder?$('topupUid').value.trim():(i.gameUid||''),orderType:topupOrder?'Top-Up':'Product'}});
+    try{
+      await addDoc(collection(db,'orders'),{
+        userId:currentUser.uid,userName:userData?.name||currentUser.displayName||'',email:currentUser.email,
+        orderType:topupOrder?'Top-Up':'Product',
+        phone:topupOrder?'':$('cPhone').value.trim(),district:topupOrder?'':$('district').value.trim(),upazila:topupOrder?'':$('upazila').value.trim(),
+        village:topupOrder?'':$('village').value.trim(),road:topupOrder?'':$('road').value.trim(),address:topupOrder?'':$('address').value.trim(),
+        deliveryArea:topupOrder?'digital':$('area').value,deliveryFee:fee,items,subtotal,total,
+        gameUid:topupOrder?$('topupUid').value.trim():'',
+        txid:$('payMethod').value==='bkash'?$('txid').value.trim():'',
+        payment:$('payMethod').value==='wallet'?'Wallet Pending':'Pending',
+        paymentMethod:$('payMethod').value,status:'Order Pending',delivery:topupOrder?'Digital':'Pending',createdAt:serverTimestamp()
+      });
+      cart=[];localStorage.removeItem('PRIMEX_CART');updateUI();closeModal();page('orders');toast('Order submitted to Admin');
+    }catch(err){toast(err.message)}
+  };
+}
+
+async function renderOrders(){
+  if(!currentUser){$('ordersBox').innerHTML='<div class="panel empty">Login first.</div>';return}
+  try{
+    const snap=await getDocs(query(collection(db,'orders'),where('userId','==',currentUser.uid),orderBy('createdAt','desc')));
+    const os=snap.docs.map(d=>({id:d.id,...d.data()}));
+    $('ordersBox').innerHTML=os.length?os.map(o=>`
+      <div class="panel">
+        <div class="between"><b>ORDER #${o.id.slice(-8)}</b><span class="status ${o.payment==='Approved'?'approved':o.payment==='Rejected'?'rejected':'pending'}">${esc(o.status||'Order Pending')}</span></div>
+        <p>${(o.items||[]).map(i=>`${esc(i.name)} × ${i.qty}${i.gameUid?' • UID '+esc(i.gameUid):''}`).join('<br>')}</p>
+        <p><b>Total ${money(o.total)}</b> • ${o.orderType==='Top-Up'?'IN GAME UID: '+esc(o.gameUid||((o.items||[])[0]?.gameUid)||'-'):'Delivery: '+esc(o.delivery||'Pending')}</p>
+        ${o.orderType==='Product'?`<p class="muted">Address: ${esc([o.district,o.upazila,o.village,o.road,o.address].filter(Boolean).join(', '))}</p>`:''}
+        <p class="muted">Payment: ${esc(o.payment||'Pending')} • TXID: ${esc(o.txid||'')}</p>
+      </div>`).join(''):'<div class="panel empty">No orders yet.</div>';
+  }catch(err){$('ordersBox').innerHTML='<div class="panel empty">Order load error. If Firebase asks for an index, create the suggested Firestore index.</div>'}
+}
+
+async function renderWallet(){
+  if(!currentUser){$('walletBox').innerHTML='<div class="panel empty">Login to use Wallet.</div>';return}
+  try{
+    const snap=await getDocs(query(collection(db,'walletRequests'),where('userId','==',currentUser.uid)));
+    const rs=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{
+      const at=a.createdAt?.toMillis?a.createdAt.toMillis():0;
+      const bt=b.createdAt?.toMillis?b.createdAt.toMillis():0;
+      return bt-at;
+    });
+    $('walletBox').innerHTML=`
+      <div class="walletHero">
+        <div class="walletTitle">✨ PRIMExSHOP WALLET</div>
+        <div style="font-size:12px;opacity:.85;margin-top:12px">TOTAL BALANCE</div>
+        <div class="walletBalance">${money(userData?.wallet||0)}</div>
+      </div>
+      <div class="walletActions">
+        <button class="walletAction" id="walletAddBtn">＋ Add Money</button>
+        <button class="walletAction yellow" id="walletHistoryBtn">↺ Transaction History</button>
+      </div>
+      <div class="panel" id="walletAddPanel">
+        <h3>💳 Add Money</h3>
+        <p class="muted">প্রথমে নিচের bKash নম্বরে Send Money করুন। তারপর Amount ও Transaction ID দিন। Admin approve করলে টাকা Wallet-এ যোগ হবে।</p>
+        <div class="bkashBox">
+          <b>bKash Personal Account</b>
+          <div class="bkashNumber"><strong style="font-size:18px">${BKASH}</strong><button class="copyBtn" id="copyBkash">COPY</button></div>
+        </div>
+        <form class="form" id="walletForm" style="margin-top:12px">
+          <input class="input" id="amount" type="number" min="1" step="1" placeholder="Enter Amount (৳)" required>
+          <input class="input" id="tx" placeholder="Enter Transaction ID" required>
+          <button class="btn primary">VERIFY / SEND REQUEST</button>
+        </form>
+      </div>
+      <div class="panel" id="walletHistoryPanel">
+        <h3>Transaction History</h3>
+        ${rs.length?rs.map(r=>`<div class="historyRow"><div><b>Deposit ${money(r.amount)}</b><br><small class="muted">TXID: ${esc(r.txid||'-')}</small></div><span class="status ${r.status==='Approved'?'approved':r.status==='Rejected'?'rejected':'pending'}">${esc(r.status||'Pending')}</span></div>`).join(''):'<span class="muted">No transactions yet.</span>'}
+      </div>`;
+    $('copyBkash').onclick=async()=>{try{await navigator.clipboard.writeText(BKASH);toast('bKash number copied')}catch(e){toast('Number: '+BKASH)}};
+    $('walletHistoryBtn').onclick=()=>document.getElementById('walletHistoryPanel')?.scrollIntoView({behavior:'smooth',block:'start'});
+    $('walletAddBtn').onclick=()=>document.getElementById('walletAddPanel')?.scrollIntoView({behavior:'smooth',block:'start'});
+    $('walletForm').onsubmit=async e=>{
+      e.preventDefault();
+      const amount=Number($('amount').value),txid=$('tx').value.trim();
+      if(!amount||amount<1)return toast('Enter a valid amount');
+      if(!txid)return toast('Enter Transaction ID');
+      try{
+        await addDoc(collection(db,'walletRequests'),{userId:currentUser.uid,userName:userData?.name||'',email:currentUser.email||'',amount,txid,status:'Pending',createdAt:serverTimestamp()});
+        toast('Request sent to Admin');
+        renderWallet();
+      }catch(err){toast('Request failed: '+(err.message||'Firebase error'))}
+    };
+  }catch(err){
+    console.error('Wallet load error:',err);
+    $('walletBox').innerHTML=`<div class="panel empty"><b>Wallet load error.</b><br><small class="muted">${esc(err.message||'Unknown Firebase error')}</small></div>`;
+  }
+}
+function renderProfile(){
+  if(!currentUser){
+    $('profileBox').innerHTML=`<div class="panel empty"><h3>Login required</h3><button class="btn primary" id="profileLogin">LOGIN / REGISTER</button></div>`;
+    $('profileLogin').onclick=authModal;return;
+  }
+  const p=userData||{};
+  const photo=p.photoUrl||'';
+  $('profileBox').innerHTML=`
+    <div class="profileTop">
+      <div class="avatarWrap">
+        <img class="avatar" id="profileAvatar" src="${esc(photo||placeholderAvatar())}" onerror="this.src='${placeholderAvatar()}'">
+        <button class="btn primary changePhoto" id="changePhoto">📷 Change Photo</button>
+      </div>
+      <div>
+        <h1 class="profileName">${esc(p.name||currentUser.displayName||'NIBIR USER')}</h1>
+        <div class="username">@${esc(p.username||'user')}</div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:4px;border-color:#553a18;background:linear-gradient(135deg,#17130e,#111319)">
+      <div class="between" style="gap:12px;align-items:center">
+        <div>
+          <small class="muted">WALLET BALANCE</small>
+          <h2 style="color:var(--orange);margin-top:4px">${money(p.wallet||0)}</h2>
+          <div class="muted" style="margin-top:6px">bKash: <b style="color:#fff">${BKASH}</b></div>
+        </div>
+        <button class="btn primary small" id="profileAddMoney">💰 WALLET</button>
+      </div>
+      <button class="btn secondary" id="profileAddMoney2" style="width:100%;margin-top:12px">＋ ADD MONEY TO WALLET</button>
+    </div>
+    <div class="infoList">
+      <div class="infoRow"><div class="infoLabel"><span class="infoIcon">✉</span>Email</div><div class="infoValue">${esc(currentUser.email||p.email||'-')}</div></div>
+      <div class="infoRow"><div class="infoLabel"><span class="infoIcon">☎</span>Phone</div><div class="infoValue">${esc(p.phone||'-')}</div></div>
+      <div class="infoRow"><div class="infoLabel"><span class="infoIcon">▣</span>Birth Year</div><div class="infoValue">${esc(p.birthYear||'-')}</div></div>
+      <div class="infoRow"><div class="infoLabel"><span class="infoIcon">◉</span>Age</div><div class="infoValue">${esc(p.age||'-')}</div></div>
+      <div class="infoRow"><div class="infoLabel"><span class="infoIcon">⌖</span>Address</div><div class="infoValue">${esc(p.address||'-')}</div></div>
+    </div>
+    <div class="actions" style="margin-top:14px">
+      <button class="btn primary" id="editProfile">✎ EDIT PROFILE</button>
+      <button class="btn secondary" id="profileLogout">LOGOUT</button>
+      ${isAdmin?'<button class="btn secondary" id="profileAdmin">⚙ ADMIN DASHBOARD</button>':''}
+    </div>`;
+  $('changePhoto').onclick=changePhoto;
+  $('profileAddMoney').onclick=()=>page('wallet');
+  $('profileAddMoney2').onclick=()=>page('wallet');
+  $('editProfile').onclick=editProfile;
+  $('profileLogout').onclick=async()=>{await signOut(auth);toast('Logged out')};
+  if($('profileAdmin'))$('profileAdmin').onclick=()=>page('admin');
+}
+function placeholderAvatar(){
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect width="100%" height="100%" fill="#596783"/><circle cx="150" cy="105" r="55" fill="#e9eef0"/><path d="M55 285c10-70 55-95 95-95s85 25 95 95" fill="#e9eef0"/></svg>`;
+  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
+async function changePhoto(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=async()=>{
+    const file=inp.files?.[0];if(!file)return;
+    try{
+      const data=await compressImage(file,300,220);
+      await updateDoc(doc(db,'users',currentUser.uid),{photoUrl:data});
+      userData={...userData,photoUrl:data};renderProfile();toast('Photo updated');
+    }catch(err){toast('Photo update failed')}
+  };
+  inp.click();
+}
+function compressImage(file,maxSide=300,quality=.72){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>{const im=new Image();im.onload=()=>{
+      let w=im.width,h=im.height,s=Math.min(1,maxSide/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);
+      const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);
+      resolve(c.toDataURL('image/jpeg',quality));
+    };im.onerror=reject;im.src=r.result};r.onerror=reject;r.readAsDataURL(file)
+  })
+}
+function editProfile(){
+  const p=userData||{};
+  modal(`
+    <h2>Edit Profile</h2>
+    <form class="form" id="profileForm">
+      <input class="input" id="epName" value="${esc(p.name||'')}" placeholder="Full Name" required>
+      <input class="input" id="epUsername" value="${esc(p.username||'')}" placeholder="Username (Unique)">
+      <input class="input" id="epPhone" value="${esc(p.phone||'')}" placeholder="Phone Number" required>
+      <div class="formgrid"><input class="input" id="epBirth" type="number" value="${esc(p.birthYear||'')}" placeholder="Birth Year"><input class="input" id="epAge" type="number" value="${esc(p.age||'')}" placeholder="Age"></div>
+      <textarea class="textarea" id="epAddress" placeholder="Full Delivery Address">${esc(p.address||'')}</textarea>
+      <button class="btn primary">SAVE PROFILE</button>
+    </form>`);
+  $('profileForm').onsubmit=async e=>{
+    e.preventDefault();
+    try{
+      const data={name:$('epName').value.trim(),username:$('epUsername').value.trim(),phone:$('epPhone').value.trim(),birthYear:Number($('epBirth').value)||'',age:Number($('epAge').value)||'',address:$('epAddress').value.trim()};
+      await updateDoc(doc(db,'users',currentUser.uid),data);
+      await updateProfile(currentUser,{displayName:data.name});
+      userData={...userData,...data};closeModal();renderProfile();toast('Profile updated');
+    }catch(err){toast(err.message)}
+  };
+}
+
+/* ADMIN DASHBOARD */
+async function renderAdmin(){
+  isAdmin=!!currentUser&&currentUser.uid===ADMIN_UID;
+  if(!isAdmin){
+    $('adminBox').innerHTML=`<div class="panel" style="max-width:560px;margin:auto"><h3>Admin Access</h3><p class="muted">Admin Dashboard is separate and protected by Firebase Authentication + Admin UID.</p><button class="btn primary" id="adminLogin">LOGIN AS ADMIN</button></div>`;
+    $('adminLogin').onclick=authModal;return;
+  }
+  $('adminBox').innerHTML=`
+    <div class="stats">
+      <div class="stat"><small>Admin</small><strong>✓</strong></div>
+      <div class="stat"><small>Payment Verification</small><strong>ON</strong></div>
+      <div class="stat"><small>bKash</small><strong style="font-size:15px">${BKASH}</strong></div>
+      <div class="stat"><small>Delivery</small><strong>60 / 100</strong></div>
+    </div>
+    <div class="tabs" style="margin-top:14px">
+      <button class="tab ${adminTab==='orders'?'active':''}" data-admin-tab="orders">ORDERS</button>
+      <button class="tab ${adminTab==='users'?'active':''}" data-admin-tab="users">USERS / WALLET</button>
+      <button class="tab ${adminTab==='products'?'active':''}" data-admin-tab="products">PRODUCTS</button>
+      <button class="tab ${adminTab==='media'?'active':''}" data-admin-tab="media">MEDIA</button>
+    </div>
+    <div id="adminContent"></div>`;
+  document.querySelectorAll('[data-admin-tab]').forEach(b=>b.onclick=()=>{adminTab=b.dataset.adminTab;renderAdmin()});
+  renderAdminTab();
+}
+async function renderAdminTab(){
+  if(adminTab==='orders')await adminOrders();
+  if(adminTab==='users')await adminUsers();
+  if(adminTab==='products')adminProducts();
+  if(adminTab==='media')adminMedia();
+}
+async function adminOrders(){
+  try{
+    const snap=await getDocs(query(collection(db,'orders'),orderBy('createdAt','desc')));
+    const os=snap.docs.map(d=>({id:d.id,...d.data()}));
+    $('adminContent').innerHTML=`<div class="panel tablewrap"><h3>Orders & Payment Verification</h3><table class="table"><tr><th>Order</th><th>User</th><th>Payment</th><th>Location</th><th>Actions</th></tr>
+    ${os.length?os.map(o=>`<tr>
+      <td><b>#${o.id.slice(-8)}</b><br>${(o.items||[]).map(i=>`${esc(i.name)} × ${i.qty}${i.gameUid?'<br>UID: '+esc(i.gameUid):''}`).join('<br>')}<br><b>${money(o.total)}</b><br>TXID: ${esc(o.txid||'')}</td>
+      <td>${esc(o.userName||'')}<br>UID: ${esc(o.userId||'')}<br>${esc(o.phone||'')}</td>
+      <td><span class="status ${o.payment==='Approved'?'approved':o.payment==='Rejected'?'rejected':'pending'}">${esc(o.payment||'Pending')}</span><br>${esc(o.status||'')}</td>
+      <td>${o.orderType==='Top-Up'?`<b>TOP-UP</b><br>UID: ${esc(o.gameUid||((o.items||[])[0]?.gameUid)||'')}`:`${esc(o.district||'')}, ${esc(o.upazila||'')}<br>${esc(o.village||'')}, ${esc(o.road||'')}<br>${esc(o.address||'')}<br>Fee: ${money(o.deliveryFee)}`}</td>
+      <td>
+        ${o.payment==='Pending'?`<button class="btn green small" data-approve="${o.id}">Approve</button> <button class="btn red small" data-reject="${o.id}">Reject</button>`:''}
+        ${o.paymentMethod==='wallet'&&o.payment==='Wallet Pending'?`<button class="btn secondary small" data-wallet-order="${o.id}">Wallet Approve</button>`:''}
+        ${o.payment==='Approved'&&o.delivery!=='Confirmed'?`<button class="btn primary small" data-delivery="${o.id}">Delivery Confirm</button>`:''}
+      </td>
+    </tr>`).join(''):'<tr><td colspan="5" class="empty">No orders.</td></tr>'}</table></div>`;
+  }catch(err){$('adminContent').innerHTML='<div class="panel empty">Admin orders load error.</div>'}
+}
+document.addEventListener('click',async e=>{
+  const a=e.target.closest('[data-approve]'),r=e.target.closest('[data-reject]'),w=e.target.closest('[data-wallet-order]'),d=e.target.closest('[data-delivery]');
+  try{
+    if(a)await approveOrder(a.dataset.approve);
+    if(r)await rejectOrder(r.dataset.reject);
+    if(w)await approveWalletOrder(w.dataset.walletOrder);
+    if(d)await confirmDelivery(d.dataset.delivery);
+  }catch(err){toast(err.message)}
+});
+async function approveOrder(id){
+  const ref=doc(db,'orders',id),s=await getDoc(ref);if(!s.exists())return;
+  const o=s.data();if(o.payment!=='Pending')return toast('Already processed');
+  await updateDoc(ref,{payment:'Approved',status:'Order Confirmed',approvedAt:serverTimestamp()});toast('Payment approved');renderAdminTab();
+}
+async function rejectOrder(id){
+  const ref=doc(db,'orders',id),s=await getDoc(ref);if(!s.exists())return;
+  const o=s.data();if(o.payment!=='Pending')return toast('Already processed');
+  await updateDoc(ref,{payment:'Rejected',status:'Order Rejected',rejectedAt:serverTimestamp()});toast('Payment rejected');renderAdminTab();
+}
+async function approveWalletOrder(id){
+  const ref=doc(db,'orders',id),s=await getDoc(ref);if(!s.exists())return;
+  const o=s.data();if(o.payment!=='Wallet Pending')return toast('Already processed');
+  const us=await getDoc(doc(db,'users',o.userId));if(!us.exists())return toast('User not found');
+  const u=us.data();if(Number(u.wallet||0)<Number(o.total))return toast('Wallet balance is no longer enough');
+  await updateDoc(doc(db,'users',o.userId),{wallet:increment(-Number(o.total))});
+  await updateDoc(ref,{payment:'Approved',status:'Order Confirmed',approvedAt:serverTimestamp()});
+  toast('Wallet deducted and order approved');renderAdminTab();
+}
+async function confirmDelivery(id){
+  const ref=doc(db,'orders',id),s=await getDoc(ref);if(!s.exists())return;
+  if(s.data().payment!=='Approved')return toast('Approve payment first');
+  await updateDoc(ref,{delivery:'Confirmed',status:'Delivery Confirmed',deliveryConfirmedAt:serverTimestamp()});
+  toast('Delivery confirmed');renderAdminTab();
+}
+async function adminUsers(){
+  const [us,rs]=await Promise.all([getDocs(collection(db,'users')),getDocs(collection(db,'walletRequests'))]);
+  const users=us.docs.map(d=>d.data()),reqs=rs.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{
+    const at=a.createdAt?.toMillis?a.createdAt.toMillis():0;
+    const bt=b.createdAt?.toMillis?b.createdAt.toMillis():0;
+    return bt-at;
+  });
+  $('adminContent').innerHTML=`<div class="panel tablewrap"><h3>Users & Wallet Requests</h3><table class="table"><tr><th>User</th><th>Wallet</th><th>Requests</th></tr>
+  ${users.map(u=>`<tr><td><b>${esc(u.name||'')}</b><br>ID: ${esc(u.uid)}<br>${esc(u.email||'')}<br>${esc(u.phone||'')}</td><td><b>${money(u.wallet)}</b></td><td>
+  ${reqs.filter(r=>r.userId===u.uid).map(r=>`<div class="notice" style="margin-bottom:8px">${money(r.amount)} • TX ${esc(r.txid)} • ${esc(r.status)} ${r.status==='Pending'?`<br><button class="btn green small" data-aw="${r.id}">Approve</button> <button class="btn red small" data-rw="${r.id}">Reject</button>`:''}</div>`).join('')||'<span class="muted">None</span>'}</td></tr>`).join('')}</table></div>`;
+}
+document.addEventListener('click',async e=>{
+  const a=e.target.closest('[data-aw]'),r=e.target.closest('[data-rw]');
+  try{if(a)await approveWallet(a.dataset.aw);if(r)await rejectWallet(r.dataset.rw)}catch(err){toast(err.message)}
+});
+async function approveWallet(id){
+  const ref=doc(db,'walletRequests',id),s=await getDoc(ref);if(!s.exists()||s.data().status!=='Pending')return;
+  const d=s.data();await updateDoc(ref,{status:'Approved',approvedAt:serverTimestamp()});
+  await updateDoc(doc(db,'users',d.userId),{wallet:increment(Number(d.amount))});
+  toast('Wallet credited');renderAdminTab();
+}
+async function rejectWallet(id){
+  const ref=doc(db,'walletRequests',id);await updateDoc(ref,{status:'Rejected',rejectedAt:serverTimestamp()});toast('Wallet request rejected');renderAdminTab();
+}
+function adminProducts(){
+  $('adminContent').innerHTML=`<div class="panel"><h3>Add Product</h3>
+    <form class="form" id="productForm">
+      <div class="formgrid"><input class="input" id="pn" placeholder="Product name" required><input class="input" id="pp" type="number" min="0" placeholder="Price" required></div>
+      <div class="formgrid"><input class="input" id="pc" placeholder="Category" required><input class="input" id="ps" type="number" min="0" placeholder="Stock" required></div>
+      <textarea class="textarea" id="pd" placeholder="Description"></textarea><input class="input" id="pi" placeholder="Image URL (optional)">
+      <button class="btn primary">ADD PRODUCT</button>
+    </form></div>
+    <div class="panel"><h3>Product Management</h3>${products.map(p=>`<div class="between" style="padding:12px 0;border-bottom:1px solid #292d37"><div><b>${esc(p.name)}</b><br><span class="muted">${money(p.price)} • Stock ${p.stock||0}</span></div><button class="btn red small" data-del-product="${p.id}">DELETE</button></div>`).join('')||'<div class="empty">No products.</div>'}</div>`;
+  $('productForm').onsubmit=async e=>{
+    e.preventDefault();
+    try{
+      await addDoc(collection(db,'products'),{name:$('pn').value.trim(),price:Number($('pp').value),category:$('pc').value.trim(),stock:Number($('ps').value),description:$('pd').value.trim(),imageUrl:$('pi').value.trim(),createdAt:serverTimestamp()});
+      toast('Product added');adminProducts();
+    }catch(err){toast(err.message)}
+  };
+}
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-del-product]');
+  if(b){try{await deleteDoc(doc(db,'products',b.dataset.delProduct));toast('Product deleted');adminProducts()}catch(err){toast(err.message)}}
+});
+function adminMedia(){
+  $('adminContent').innerHTML=`<div class="panel"><h3>Website Image / Video</h3><p class="muted">Firebase Storage ছাড়া media URL save করা যাবে।</p>
+    <form class="form" id="mediaForm"><input class="input" id="mediaName" placeholder="Media name" required><select class="select" id="mediaType"><option value="image">Image</option><option value="video">Video</option></select><input class="input" id="mediaUrl" type="url" placeholder="https://... media URL" required><button class="btn primary">SAVE MEDIA</button></form>
+    <div id="mediaList" style="margin-top:15px"></div></div>`;
+  loadMediaList();
+  $('mediaForm').onsubmit=async e=>{
+    e.preventDefault();
+    try{await addDoc(collection(db,'media'),{name:$('mediaName').value.trim(),type:$('mediaType').value,url:$('mediaUrl').value.trim(),createdAt:serverTimestamp()});toast('Media saved');e.target.reset();loadMediaList()}catch(err){toast(err.message)}
+  };
+}
+async function loadMediaList(){
+  const s=await getDocs(query(collection(db,'media'),orderBy('createdAt','desc')));
+  $('mediaList').innerHTML=s.docs.length?s.docs.map(d=>{const x=d.data();return `<div class="between" style="padding:10px 0;border-bottom:1px solid #292d37"><span>${esc(x.name)} • ${esc(x.type)}</span><button class="btn red small" data-del-media="${d.id}">DELETE</button></div>`}).join(''):'<span class="muted">No media yet.</span>';
+}
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-del-media]');
+  if(b){try{await deleteDoc(doc(db,'media',b.dataset.delMedia));toast('Media deleted');loadMediaList()}catch(err){toast(err.message)}}
+});
+
+onAuthStateChanged(auth,loadUser);
+listenProducts();
+updateUI();
+</script>
+</body>
+</html>
